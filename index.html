@@ -3,88 +3,151 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Главная — Магазин</title>
+  <title>Магазин Холодильного Оборудования</title>
   <style>
+    /* 1. ШРИФТЫ И ОСНОВА */
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+
     body {
       margin: 0;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      background: linear-gradient(135deg, #e0e7ff, #c3dafe);
-      font-family: 'Segoe UI', sans-serif;
-      padding: 40px 20px;
+      /* Современный мягкий градиент */
+      background: radial-gradient(circle at 0% 0%, #ffffff 0%, #f1f5f9 100%);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      padding: 60px 20px;
       box-sizing: border-box;
-    }
-
-    .hero-title {
-      font-size: 2.8rem;
       color: #0f172a;
-      margin: 0 auto 50px 0;
-      align-self: flex-start;
-      padding-left: 5%;
-      font-weight: 700;
-      letter-spacing: -0.5px;
     }
 
+    /* 2. ЗАГОЛОВОК С ГРАДИЕНТОМ */
+    .hero-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 60px;
+      max-width: 800px;
+      line-height: 1.2;
+      letter-spacing: -2px;
+      /* Градиентный текст */
+      background: linear-gradient(135deg, #0f172a 0%, #2563eb 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* 3. КОНТЕЙНЕР ДЛЯ КАРТОЧЕК */
     .fridge-container {
       display: flex;
       flex-wrap: wrap;
-      gap: 40px;
+      gap: 50px;
       justify-content: center;
-      margin-bottom: 60px;
+      max-width: 1200px;
     }
 
-    .fridge-link {
+    /* 4. СТИЛЬ КАРТОЧКИ (GLASSMORPHISM) */
+    .fridge-card {
       text-decoration: none;
+      color: inherit;
       position: relative;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(10px); /* Размытие фона за карточкой */
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 40px;
+      padding: 24px;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
     }
 
-    .fridge-link:hover {
-      transform: translateY(-12px);
-      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.25);
+    .fridge-card:hover {
+      transform: translateY(-15px) scale(1.02);
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 40px 80px -20px rgba(37, 99, 235, 0.15);
+      border-color: #2563eb;
     }
 
+    /* ИЗОБРАЖЕНИЕ ВНУТРИ КАРТОЧКИ */
     .preview-img {
-      width: 300px;
-      max-width: 90vw;
-      border-radius: 32px;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2);
-      display: block;
+      width: 320px;
+      height: 400px;
+      object-fit: cover; /* Чтобы картинки были одного размера */
+      border-radius: 24px;
+      margin-bottom: 20px;
+      transition: transform 0.5s ease;
     }
 
-    @media (max-width: 680px) {
-      .hero-title {
-        font-size: 2.2rem;
-        padding-left: 4%;
-      }
-      .fridge-container {
-        flex-direction: column;
-        gap: 50px;
-      }
+    .fridge-card:hover .preview-img {
+      transform: scale(1.05);
+    }
+
+    /* ТЕКСТ В КАРТОЧКЕ */
+    .fridge-card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 10px 0 5px 0;
+      color: #1e293b;
+    }
+
+    /* КНОПКА "ПОСМОТРЕТЬ" ВНУТРИ КАРТОЧКИ */
+    .btn-more {
+      margin-top: 15px;
+      font-weight: 600;
+      color: #2563eb;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+
+    .fridge-card:hover .btn-more {
+      opacity: 1;
+    }
+
+    /* ДЕКОРАТИВНЫЕ ПЯТНА НА ФОНЕ */
+    .bg-blob {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      background: #2563eb;
+      filter: blur(120px);
+      opacity: 0.05;
+      z-index: -1;
+      border-radius: 50%;
+    }
+
+    /* 5. АДАПТИВНОСТЬ */
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2.2rem; margin-bottom: 40px; }
+      .preview-img { width: 280px; height: 350px; }
     }
   </style>
 </head>
 <body>
 
-  <h1 class="hero-title">Выберите ваше холодильное оборудование.</h1>
+  <div class="bg-blob" style="top: -100px; left: -100px;"></div>
+  <div class="bg-blob" style="bottom: -100px; right: -100px; background: #6366f1;"></div>
+
+  <h1 class="hero-title">Выберите ваше холодильное оборудование</h1>
 
   <div class="fridge-container">
-    <a href="holodilnik_1.html" class="fridge-link">
-      <img src="fridge.jpg" alt="Холодильник 1" class="preview-img">
-      <div style="text-align: center;">
-        <h3>Холодильник для пива</h3>
-      </div>
-      
+    
+    <a href="holodilnik_1.html" class="fridge-card">
+      <img src="fridge.jpg" alt="Холодильник для пива" class="preview-img">
+      <h3>Для пива</h3>
+      <div class="btn-more">Подробнее <span>→</span></div>
     </a>
 
-    <a href="holodilnik_2.html" class="fridge-link">
-      <img src="fridge2.jpg" alt="Холодильник 2" class="preview-img">
-      <div style="text-align: center;">
-        <h3>Холодильник для колбасы</h3>
-      </div>
+    <a href="holodilnik_2.html" class="fridge-card">
+      <img src="fridge2.jpg" alt="Холодильник для колбасы" class="preview-img">
+      <h3>Для колбасы</h3>
+      <div class="btn-more">Подробнее <span>→</span></div>
     </a>
+
   </div>
 
 </body>
