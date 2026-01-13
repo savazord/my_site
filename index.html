@@ -3,139 +3,88 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Холодильник с подсказками</title>
+  <title>Главная — Магазин</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
     body {
       margin: 0;
-      min-height: 100dvh;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, #e0e7ff, #c3dafe);
-      font-family: system-ui, 'Segoe UI', sans-serif;
-      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+      font-family: 'Segoe UI', sans-serif;
+      padding: 40px 20px;
+      box-sizing: border-box;
+    }
+
+    .hero-title {
+      font-size: 2.8rem;
+      color: #0f172a;
+      margin: 0 auto 50px 0;
+      align-self: flex-start;
+      padding-left: 5%;
+      font-weight: 700;
+      letter-spacing: -0.5px;
     }
 
     .fridge-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: center;
+      margin-bottom: 60px;
+    }
+
+    .fridge-link {
+      text-decoration: none;
       position: relative;
-      width:  min(340px, 88vw);
-      aspect-ratio: 340 / 540;
-      background: #f8fafc;
-      border-radius: 24px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.18);
-      overflow: hidden;
-      transition: transform 0.35s ease, box-shadow 0.35s ease;
-      cursor: default;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .fridge-container:hover {
-      transform: scale(1.035);
-      box-shadow: 0 35px 70px rgba(0,0,0,0.22);
+    .fridge-link:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.25);
     }
 
-    .fridge {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .preview-img {
+      width: 300px;
+      max-width: 90vw;
+      border-radius: 32px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2);
       display: block;
-      pointer-events: none; /* чтобы события шли через img на контейнер */
     }
 
-    /* Общие стили для tooltip */
-    .tooltip {
-      position: absolute;
-      left: 100%;               /* сразу справа от контейнера */
-      top: 50%;
-      transform: translateY(-50%);
-      margin-left: 14px;        /* небольшой отступ от края холодильника */
-      background: rgba(15, 23, 42, 0.92);
-      color: #f1f5f9;
-      padding: 12px 18px;
-      border-radius: 10px;
-      font-size: 15px;
-      font-weight: 500;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.2);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.25s ease, transform 0.25s ease;
-      pointer-events: none;
-      white-space: nowrap;
-      z-index: 10;
-    }
-
-    .tooltip::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      right: 100%;
-      transform: translateY(-50%);
-      border: 8px solid transparent;
-      border-right-color: rgba(15, 23, 42, 0.92);
-    }
-
-    /* Показываем только нужный tooltip */
-    .upper:hover ~ .tooltip-upper,
-    .lower:hover ~ .tooltip-lower {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(-50%) translateX(4px);
-    }
-
-    /* Делим область на две половины */
-    .upper,
-    .lower {
-      position: absolute;
-      left: 0;
-      width: 100%;
-      height: 50%;
-      z-index: 5;
-    }
-
-    .upper { top: 0; }
-    .lower { bottom: 0; }
-
-    @media (max-width: 500px) {
-      .tooltip {
-        font-size: 13.5px;
-        padding: 10px 14px;
-        margin-left: 10px;
+    @media (max-width: 680px) {
+      .hero-title {
+        font-size: 2.2rem;
+        padding-left: 4%;
       }
-      .tooltip::after {
-        border-width: 7px;
+      .fridge-container {
+        flex-direction: column;
+        gap: 50px;
       }
     }
   </style>
 </head>
 <body>
 
+  <h1 class="hero-title">Выберите ваше холодильное оборудование.</h1>
+
   <div class="fridge-container">
+    <a href="holodilnik_1.html" class="fridge-link">
+      <img src="fridge.jpg" alt="Холодильник 1" class="preview-img">
+      <div style="text-align: center;">
+        <h3>Холодильник для пива</h3>
+      </div>
+      
+    </a>
 
-    <img
-      src="fridge.jpg"
-      alt="Холодильник"
-      class="fridge"
-      loading="lazy"
-    >
-
-    <!-- Две невидимые зоны для наведения -->
-    <div class="upper"></div>
-    <div class="lower"></div>
-
-    <!-- Tooltip для верхней части -->
-    <div class="tooltip tooltip-upper">
-      ВЕРХ ВЕРХ ВЕРХ<br>190 л, No Frost, зона свежести
-    </div>
-
-    <!-- Tooltip для нижней части -->
-    <div class="tooltip tooltip-lower">
-      НИЗ НИЗ НИЗ<br>морозилка 80 л, 3 ящика, суперзаморозка
-    </div>
-
+    <a href="holodilnik_2.html" class="fridge-link">
+      <img src="fridge2.jpg" alt="Холодильник 2" class="preview-img">
+      <div style="text-align: center;">
+        <h3>Холодильник для колбасы</h3>
+      </div>
+    </a>
   </div>
 
 </body>
